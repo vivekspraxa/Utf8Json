@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;NET45;NET47</TargetFrameworks>
+        <TargetFrameworks>NET45;NET47</TargetFrameworks>
         <Configurations>Debug;Release;</Configurations>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>opensource.snk</AssemblyOriginatorKeyFile>
@@ -67,6 +67,10 @@
         <PackageReference Include="System.ValueTuple" Version="4.4.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="System.Web" />
+      <Reference Include="System.Web.Extensions" />
+    </ItemGroup>
     <ItemGroup>
         <None Update="Formatters\PrimitiveFormatter.tt">
             <Generator>TextTemplatingFileGenerator</Generator>

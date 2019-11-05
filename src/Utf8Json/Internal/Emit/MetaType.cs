@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Web.Script.Serialization;
 
 namespace Utf8Json.Internal.Emit
 {
@@ -29,7 +30,7 @@ namespace Utf8Json.Internal.Emit
                 foreach (var item in type.GetAllProperties())
                 {
                     if (item.GetIndexParameters().Length > 0) continue; // skip indexer
-                    if (item.GetCustomAttribute<IgnoreDataMemberAttribute>(true) != null) continue;
+                    if (item.GetCustomAttribute<ScriptIgnoreAttribute>(true) != null) continue;
 
                     var dm = item.GetCustomAttribute<DataMemberAttribute>(true);
                     var name = (dm != null && dm.Name != null) ? dm.Name : nameMutetor(item.Name);
@@ -45,7 +46,7 @@ namespace Utf8Json.Internal.Emit
                 }
                 foreach (var item in type.GetAllFields())
                 {
-                    if (item.GetCustomAttribute<IgnoreDataMemberAttribute>(true) != null) continue;
+                    if (item.GetCustomAttribute<ScriptIgnoreAttribute>(true) != null) continue;
                     if (item.GetCustomAttribute<System.Runtime.CompilerServices.CompilerGeneratedAttribute>(true) != null) continue;
                     if (item.IsStatic) continue;
                     if (item.Name.StartsWith("<")) continue; // compiler generated field(anonymous type, etc...)
